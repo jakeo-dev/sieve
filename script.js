@@ -1,11 +1,11 @@
 // TODO
-// DOESNT WORK ON WEBSITES THAT USE THINGS LIKE REACT O NEXT WHERE THE PAGE DOESNT RELOAD
+// DOESNT WORK ON WEBSITES THAT USE THINGS LIKE REACT OR NEXT WHERE THE PAGE DOESNT RELOAD
 
 const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, span, p, a, li, input, button, parentDiv, i, select");
 
 const reals = [];
 
-const words = ["site", "late", "and"];
+let words = [];
 let filterType = 0;
 // 0: just the string
 // 1: all words containing the string
@@ -13,7 +13,8 @@ let censorType = 0;
 // 0: asterisks
 // 1: boxes
 // 2: just remove
-// 3: custom string
+// 3: custom char
+// 4: custom string
 let customCensorString = "";
 
 let parentDiv = document.createElement("div");
@@ -28,6 +29,22 @@ h1.className = "sieveTitle";
 t = document.createTextNode("Sieve");
 h1.appendChild(t);
 div.appendChild(h1);
+
+let stringsD = document.createElement("div");
+stringsD.className = "sieveSubDiv";
+stringsD.style.display = "block";
+stringsD.style.marginBottom = "12px";
+let strsSpan = document.createElement("span");
+strsSpan.className = "sieveSubDivText";
+strsSpan.style.display = "block";
+t = document.createTextNode("Enter comma-separated list of strings to censor");
+strsSpan.appendChild(t);
+stringsD.appendChild(strsSpan);
+let stringsInput = document.createElement("input");
+stringsInput.className = "sieveInput";
+stringsInput.placeholder = "Enter comma-separated list of strings to censor";
+stringsD.appendChild(stringsInput);
+div.appendChild(stringsD);
 
 let filterD = document.createElement("div");
 filterD.className = "sieveSubDiv";
@@ -138,6 +155,11 @@ censorInput.addEventListener("input", function () {
 saveBtn.addEventListener("click", function () {
     if (censorType == 3 && censorInput.value.length > 1) alert("Your custom character must only be one character.");
     else {
+        words = stringsInput.value.split(",");
+        for (let i = 0; i < words.length; i++) {
+            words[i] = words[i].trim();
+        }
+
         let i = 0;
         elements.forEach(function (el) {
             if (el.tagName == "INPUT" || el.tagName == "SELECT") {

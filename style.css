@@ -5,8 +5,8 @@
   position: fixed;
   bottom: 14px;
   left: 14px;
-  z-index: 999;
-  opacity: 90%;
+  z-index: 99999;
+  opacity: 95%;
 }
 
 .sieveDiv {
@@ -15,7 +15,7 @@
   border-width: 2px;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  padding: 20px;
+  padding: 26px;
   margin-bottom: 8px;
 }
 
@@ -23,11 +23,12 @@
   font-size: 24px;
   font-weight: bold;
   text-align: left;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .sieveSubDiv {
   display: flex;
+  text-align: left;
   align-items: center;
   margin-bottom: 3px;
 }
@@ -60,13 +61,13 @@
 }
 
 .sieveInput {
+  width: 100%;
   background-color: #f3f4f6;
   border-radius: 4px;
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 4px;
   padding-bottom: 4px;
-  margin-left: 3px;
   transition: background-color 0.2s;
 }
 
@@ -106,6 +107,7 @@
   padding: 20px;
   font-size: 16px;
   float: left;
+  cursor: pointer;
   transition: background-color 0.2s;
 }
 
