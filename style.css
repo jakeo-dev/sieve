@@ -1,0 +1,75 @@
+.sieveParentDiv {
+  position: fixed;
+  bottom: 14px;
+  left: 14px;
+  z-index: 999;
+  opacity: 90%;
+}
+
+.sieveDiv {
+  background-color: #d1d5db;
+  border-color: #9ca3af;
+  border-width: 2px;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 8px;
+}
+
+.sieveSubDiv {
+  display: flex;
+  align-items: center;
+}
+
+.sieveSubDivText {
+  font-size: 14px;
+  white-space: nowrap;
+  color: #374151;
+  margin-right: 4px;
+}
+
+.sieveDropdown {
+  display: block;
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+  transition: background-color 0.2s;
+}
+
+.sieveDropdown:hover {
+  background-color: #9ca3af;
+}
+
+.sieveDropdown:last {
+  margin-bottom: 0;
+}
+
+.sieveButton {
+  background-color: #fef08a;
+  border-color: #eab308;
+  border-width: 2px;
+  border-radius: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  float: left;
+  transition: background-color 0.2s;
+}
+
+.sieveButton:hover {
+  background-color: #fde047;
+}
+
+.sieveButton:active {
+  background-color: #facc15;
+}
+
+.sieveLexendDeca {
+  font-family: "Lexend Deca", sans-serif;
+}
