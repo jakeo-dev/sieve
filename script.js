@@ -1,10 +1,11 @@
 // TODO
 // DOESNT WORK ON WEBSITES THAT USE THINGS LIKE REACT OR NEXT WHERE THE PAGE DOESNT RELOAD
 
-const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, span, p, a, li, input, button, parentDiv, i, select");
+const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, span, p, a, li, input, button, div, i, select");
 
 const reals = [];
 
+let firstWords = [];
 let words = [];
 let filterType = 0;
 // 0: just the string
@@ -99,6 +100,7 @@ censorD.appendChild(censorDropdown);
 let censorInput = document.createElement("input");
 censorInput.className = "sieveInput";
 censorInput.style.display = "none";
+censorInput.style.marginLeft = "3px";
 censorInput.placeholder = "Enter custom string";
 censorD.appendChild(censorInput);
 div.appendChild(censorD);
@@ -155,37 +157,49 @@ censorInput.addEventListener("input", function () {
 saveBtn.addEventListener("click", function () {
     if (censorType == 3 && censorInput.value.length > 1) alert("Your custom character must only be one character.");
     else {
-        words = stringsInput.value.split(",");
-        for (let i = 0; i < words.length; i++) {
-            words[i] = words[i].trim();
+        firstWords = stringsInput.value.split(",");
+        for (let i = 0; i < firstWords.length; i++) {
+            firstWords[i] = firstWords[i].trim();
+        }
+        words = [];
+        for (let i = 0; i < firstWords.length; i++) {
+            if (firstWords[i] !== "") words.push(firstWords[i]);
         }
 
         let i = 0;
         elements.forEach(function (el) {
-            if (el.tagName == "INPUT" || el.tagName == "SELECT") {
-                el.value = reals[i];
-            } else {
-                el.innerHTML = reals[i];
+            if (!hasChildren(el)) {
+                if (el.tagName == "INPUT" || el.tagName == "SELECT") {
+                    el.value = reals[i];
+                } else {
+                    el.innerHTML = reals[i];
+                }
+                i++;
             }
-            i++;
         });
-        doIt();
+        elements.forEach(function (el) {
+            if (!hasChildren(el)) {
+                if (el.tagName == "INPUT" || el.tagName == "SELECT") {
+                    reals.push(el.value);
+                    el.value = filter(el.value);
+                } else {
+                    reals.push(el.innerHTML);
+                    el.innerHTML = filter(el.innerHTML);
+                }
+            }
+        });
     }
 });
 
-function doIt() {
-    elements.forEach(function (el) {
+elements.forEach(function (el) {
+    if (!hasChildren(el)) {
         if (el.tagName == "INPUT" || el.tagName == "SELECT") {
             reals.push(el.value);
-            el.value = filter(el.value);
         } else {
             reals.push(el.innerHTML);
-            el.innerHTML = filter(el.innerHTML);
         }
-    });
-}
-
-doIt();
+    }
+});
 
 function filter(text) {
     for (i = 0; i < words.length; i++) {
@@ -209,7 +223,7 @@ function filter(text) {
             replaceMask = customCensorString;
         }
 
-        if (text.includes(words[i])) text = text.replace(regEx, replaceMask);
+        if (text.toLowerCase().includes(words[i].toLowerCase())) text = text.replace(regEx, replaceMask);
     }
 
     return text;
@@ -240,4 +254,14 @@ function customCharIze(text) {
     }
 
     return censoredText;
+}
+
+function hasChildren(el) {
+    for (let i = 0; i < el.childNodes.length; i++) {
+        if (el.childNodes[i].nodeType === 1) {
+            return true;
+        }
+    }
+
+    return false;
 }
